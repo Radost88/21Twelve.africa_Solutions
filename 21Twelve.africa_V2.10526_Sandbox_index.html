@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>21Twelve — Security Freight & Fire Retardation Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600;1,9..40,300&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --steel: #1a1e24;
+    --carbon: #222831;
+    --ember: #c84b0f;
+    --flame: #e8651a;
+    --amber: #f5a623;
+    --ice: #d4e4f0;
+    --ghost: rgba(212,228,240,0.07);
+    --border: rgba(212,228,240,0.12);
+    --text: #b8c8d4;
+    --white: #f0f4f7;
+  }
+
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+
+  html { scroll-behavior: smooth; }
+
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.4rem 4rem;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.12em;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--ember); }
+
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.25s;
+  }
+  .nav-links a:hover { color: var(--amber); }
+
+
+  .nav-cta {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    background: var(--ember);
+    color: var(--white);
+    padding: 0.6rem 1.6rem;
+    border: none; cursor: pointer;
+    transition: background 0.25s;
+    text-decoration: none;
+  }
+  .nav-cta:hover { background: var(--flame); }
+
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 0% 50%, rgba(200,75,15,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 60% at 100% 60%, rgba(26,30,36,0.9) 0%, transparent 70%);
+    z-index: 1;
+  }
+
+
+  .hero-grid-lines {
+    position: absolute; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.4;
+  }
+
+
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 9rem 4rem 6rem 4rem;
+    position: relative; z-index: 2;
+  }
+
+
+  .hero-tag {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ember);
+    margin-bottom: 1.8rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 32px; height: 1px;
+    background: var(--ember);
+  }
+
+
+  .hero-headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 7vw, 7.5rem);
+    line-height: 0.92;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    margin-bottom: 2rem;
+  }
+  .hero-headline .accent { color: var(--ember); }
+
+
+  .hero-sub {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--text);
+    max-width: 440px;
+    margin-bottom: 3rem;
+    line-height: 1.75;
+  }
+
+
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+
+  .btn-primary {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    background: var(--ember);
+    color: var(--white);
+    padding: 1rem 2.2rem;
+    border: none; cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.25s, transform 0.2s;
+  }
+  .btn-primary:hover { background: var(--flame); transform: translateY(-2px); }
+
+
+  .btn-outline {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--ice);
+    padding: 1rem 2.2rem;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.25s, color 0.25s;
+  }
+  .btn-outline:hover { border-color: var(--ice); color: var(--white); }
+
+
+  .hero-right {
+    display: flex; align-items: center; justify-content: center;
+    position: relative; z-index: 2; padding: 9rem 4rem 6rem 2rem;
+  }
+
+
+  .hero-visual {
+    position: relative; width: 100%; max-width: 480px;
+  }
+
+
+  .hex-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+
+  .hex-card {
+    background: var(--ghost);
+    border: 1px solid var(--border);
+    padding: 1.8rem 1.4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, background 0.3s;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hex-card:nth-child(1) { animation-delay: 0.1s; }
+  .hex-card:nth-child(2) { animation-delay: 0.2s; }
+  .hex-card:nth-child(3) { animation-delay: 0.3s; }
+  .hex-card:nth-child(4) { animation-delay: 0.4s; }
+  .hex-card:nth-child(5) { animation-delay: 0.5s; }
+  .hex-card:nth-child(6) { animation-delay: 0.6s; }
+  .hex-card:hover { border-color: var(--ember); background: rgba(200,75,15,0.08); }
+
+
+  .hex-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--ember), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .hex-card:hover::before { opacity: 1; }
+
+
+  .hex-icon { font-size: 1.8rem; margin-bottom: 0.6rem; display: block; }
+  .hex-label {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+
+
+  .hero-stats {
+    display: flex; gap: 2.5rem; margin-top: 3.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem;
+    color: var(--amber);
+    line-height: 1;
+  }
+  .stat-label {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-top: 0.2rem;
+  }
+
+
+  /* ── DIVIDER BAND ── */
+  .divider-band {
+    background: var(--ember);
+    padding: 1rem 4rem;
+    display: flex; gap: 4rem; overflow: hidden;
+    white-space: nowrap;
+  }
+  .ticker-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.9);
+    display: flex; gap: 4rem;
+    animation: ticker 25s linear infinite;
+  }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .ticker-dot { color: rgba(255,255,255,0.4); }
+
+
+  /* ── SECTIONS ── */
+  section { padding: 8rem 4rem; }
+
+
+  .section-tag {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ember);
+    margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .section-tag::before {
+    content: '';
+    display: inline-block; width: 24px; height: 1px;
+    background: var(--ember);
+  }
+
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.8rem, 4.5vw, 4.5rem);
+    line-height: 1;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+  }
+
+
+  .section-body {
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.8;
+    max-width: 560px;
+  }
+
+
+  /* ── DUAL PILLARS ── */
+  .pillars {
+    background: var(--steel);
+    display: grid; grid-template-columns: 1fr 1fr;
+    min-height: 80vh;
+  }
+
+
+  .pillar {
+    padding: 8rem 5rem;
+    position: relative; overflow: hidden;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+
+
+  .pillar-security {
+    border-right: 1px solid var(--border);
+  }
+
+
+  .pillar-security::before {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--ember), var(--amber));
+  }
+
+
+  .pillar-fire::before {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--amber), var(--flame));
+  }
+
+
+  .pillar-bg-num {
+    position: absolute; bottom: -2rem; right: -1rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14rem;
+    color: rgba(255,255,255,0.025);
+    line-height: 1;
+    user-select: none;
+  }
+
+
+  .pillar-icon-wrap {
+    width: 64px; height: 64px;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem;
+    margin-bottom: 2.5rem;
+    position: relative;
+    transition: border-color 0.3s;
+  }
+  .pillar:hover .pillar-icon-wrap { border-color: var(--ember); }
+
+
+  .pillar-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    letter-spacing: 0.06em;
+    color: var(--white);
+    margin-bottom: 1.2rem;
+    line-height: 1;
+  }
+
+
+  .pillar-desc {
+    font-size: 0.98rem;
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+  }
+
+
+  .feature-list { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+  .feature-list li {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    color: var(--text);
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .feature-list li::before {
+    content: '→';
+    color: var(--ember);
+    font-size: 0.9rem;
+  }
+
+
+  /* ── WHY 21TWELVE ── */
+  .why-section {
+    background: var(--black);
+    display: grid; grid-template-columns: 5fr 7fr; gap: 8rem; align-items: center;
+  }
+
+
+  .why-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+    background: var(--border);
+  }
+
+
+  .why-card {
+    background: var(--black);
+    padding: 2.5rem 2rem;
+    transition: background 0.3s;
+  }
+  .why-card:hover { background: var(--ghost); }
+
+
+  .why-card-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: var(--ember);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+
+  .why-card-title {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.88rem;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.02em;
+  }
+
+
+  .why-card-desc {
+    font-size: 0.82rem;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+
+  /* ── SOLUTIONS DETAIL ── */
+  .solutions-section {
+    background: var(--carbon);
+    padding: 8rem 4rem;
+  }
+
+
+  .solutions-header {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+    align-items: end;
+    margin-bottom: 5rem;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+
+  .solutions-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+  }
+
+
+  .sol-card {
+    background: var(--ghost);
+    border: 1px solid var(--border);
+    padding: 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .sol-card:hover { border-color: var(--ember); transform: translateY(-4px); }
+
+
+  .sol-card-type {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ember);
+    margin-bottom: 1.2rem;
+  }
+
+
+  .sol-card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.06em;
+    color: var(--white);
+    margin-bottom: 0.8rem;
+    line-height: 1.1;
+  }
+
+
+  .sol-card-desc {
+    font-size: 0.85rem;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+
+  .sol-card-arrow {
+    position: absolute; bottom: 1.5rem; right: 1.5rem;
+    font-size: 1.2rem;
+    color: var(--border);
+    transition: color 0.3s, transform 0.3s;
+  }
+  .sol-card:hover .sol-card-arrow { color: var(--ember); transform: translate(3px, -3px); }
+
+
+  /* ── INDUSTRIES ── */
+  .industries-section {
+    background: var(--steel);
+    padding: 8rem 4rem;
+  }
+
+
+  .industries-header { text-align: center; margin-bottom: 5rem; }
+  .industries-header .section-body { margin: 0 auto; text-align: center; }
+
+
+  .industry-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+  }
+
+
+  .industry-item {
+    border: 1px solid var(--border);
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    transition: border-color 0.3s, background 0.3s;
+    cursor: default;
+  }
+  .industry-item:hover { border-color: var(--amber); background: var(--ghost); }
+
+
+  .industry-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+  .industry-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.15rem;
+    letter-spacing: 0.08em;
+    color: var(--white);
+    margin-bottom: 0.4rem;
+  }
+  .industry-sub {
+    font-size: 0.75rem;
+    color: var(--text);
+    font-family: 'Courier Prime', monospace;
+    letter-spacing: 0.06em;
+  }
+
+
+/* ============================================================
+       BUTTONS
+    ============================================================ */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-body); font-size: 0.9rem; font-weight: 500;
+      padding: 0.75rem 1.75rem; border-radius: var(--radius-md);
+      transition: all var(--transition); white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--amber); color: #0B0D11;
+      border: 1px solid var(--amber);
+    }
+    .btn-primary:hover { background: #F0B030; border-color: #F0B030; transform: translateY(-1px); }
+    .btn-ghost {
+      background: transparent; color: var(--text-primary);
+      border: 1px solid var(--border-hover);
+    }
+    .btn-ghost:hover { border-color: var(--amber); color: var(--amber); transform: translateY(-1px); }
+    .btn-steel {
+      background: var(--steel); color: #fff;
+      border: 1px solid var(--steel);
+    }
+    .btn-steel:hover { background: #3A8FD0; transform: translateY(-1px); }
+    .btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+
+  /* ── FOOTER ── */
+  footer {
+    background: #050507;
+    padding: 6rem 4rem 3rem;
+    border-top: 1px solid var(--border);
+  }
+
+
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem;
+    margin-bottom: 5rem;
+  }
+
+
+  .footer-brand-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem;
+    letter-spacing: 0.12em;
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+  .footer-brand-name span { color: var(--ember); }
+
+
+  .footer-brand-desc {
+    font-size: 0.85rem;
+    color: var(--text);
+    line-height: 1.7;
+    max-width: 280px;
+    margin-bottom: 2rem;
+  }
+
+
+  .footer-col-title {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ember);
+    margin-bottom: 1.5rem;
+  }
+
+
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+  .footer-links a {
+    font-size: 0.85rem;
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--white); }
+
+
+  .footer-bottom {
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+
+  .footer-copy {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    color: rgba(184,200,212,0.4);
+  }
+
+
+  .footer-certs {
+    display: flex; gap: 1.5rem;
+  }
+  .cert-badge {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(184,200,212,0.4);
+    border: 1px solid rgba(184,200,212,0.15);
+    padding: 0.3rem 0.7rem;
+  }
+
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+
+  .animate-in {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .animate-in.visible { opacity: 1; transform: translateY(0); }
+
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 2rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 8rem 2rem 4rem; }
+    .pillars { grid-template-columns: 1fr; }
+    .pillar { padding: 5rem 2rem; }
+    .pillar-security { border-right: none; border-bottom: 1px solid var(--border); }
+    .why-section { grid-template-columns: 1fr; gap: 4rem; padding: 6rem 2rem; }
+    .solutions-header { grid-template-columns: 1fr; }
+    .solutions-grid { grid-template-columns: 1fr; }
+    .industry-grid { grid-template-columns: repeat(2,1fr); }
+    .cta-section { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    section { padding: 6rem 2rem; }
+    .solutions-section { padding: 6rem 2rem; }
+    .industries-section { padding: 6rem 2rem; }
+  }
+</style>
+</head>
+<body>
+
+
+<!-- ── NAVIGATION ── -->
+<nav>
+  <a href="#" class="nav-logo">21<span>TWELVE</span></a>
+  <ul class="nav-links">
+    <li><a href="#solutions">Solutions</a></li>
+    <li><a href="#about">About Us</a></li>
+    <li><a href="#industries">Industries</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get a Quote</a>
+</nav>
+
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-grid-lines"></div>
+  <div class="hero-left">
+    <div class="hero-tag">Dual-Capability Protection</div>
+    <h1 class="hero-headline">
+      SECURE.<br>CONTAIN.<br><span class="accent">PROTECT.</span>
+    </h1>
+    <p class="hero-sub">
+      21Twelve delivers integrated security freight logistics and advanced fire retardation solutions — engineered for industries where failure is not an option.
+    </p>
+    <div class="hero-actions">
+      <a href="#solutions" class="btn-primary">Explore Solutions</a>
+      <a href="#contact" class="btn-outline">Contact Us</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-visual">
+      <div class="hex-grid">
+        <div class="hex-card"><span class="hex-icon">🔒</span><div class="hex-label">Armed Escort</div></div>
+        <div class="hex-card"><span class="hex-icon">🛡️</span><div class="hex-label">Threat Intel</div></div>
+        <div class="hex-card"><span class="hex-icon">📡</span><div class="hex-label">Live Tracking</div></div>
+        <div class="hex-card"><span class="hex-icon">🔥</span><div class="hex-label">Fire Suppress.</div></div>
+        <div class="hex-card"><span class="hex-icon">🧯</span><div class="hex-label">FR Coatings</div></div>
+        <div class="hex-card"><span class="hex-icon">⚡</span><div class="hex-label">24/7 Response</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── TICKER ── -->
+<div class="divider-band">
+  <div class="ticker-text">
+    <span>Security Freight Logistics</span>
+    <span class="ticker-dot">◆</span>
+    <span>Fire Retardation Systems</span>
+    <span class="ticker-dot">◆</span>
+    <span>High-Value Cargo Protection</span>
+    <span class="ticker-dot">◆</span>
+    <span>Fire-Resistant Infrastructure</span>
+    <span class="ticker-dot">◆</span>
+    <span>Risk Mitigation</span>
+    <span class="ticker-dot">◆</span>
+    <span>Critical Asset Defense</span>
+    <span class="ticker-dot">◆</span>
+    <span>Security Freight Logistics</span>
+    <span class="ticker-dot">◆</span>
+    <span>Fire Retardation Systems</span>
+    <span class="ticker-dot">◆</span>
+    <span>High-Value Cargo Protection</span>
+    <span class="ticker-dot">◆</span>
+    <span>Fire-Resistant Infrastructure</span>
+    <span class="ticker-dot">◆</span>
+    <span>Risk Mitigation</span>
+    <span class="ticker-dot">◆</span>
+    <span>Critical Asset Defense</span>
+    <span class="ticker-dot">◆</span>
+  </div>
+</div>
+
+
+<!-- ── DUAL PILLARS ── -->
+<div class="pillars" id="solutions">
+  <div class="pillar pillar-security">
+    <div class="pillar-bg-num">01</div>
+    <div class="pillar-icon-wrap">🔒</div>
+    <div class="section-tag">Core Capability 01</div>
+    <h2 class="pillar-title">Security Freight Solutions</h2>
+    <p class="pillar-desc">
+      End-to-end secure logistics for high-value, sensitive, and regulated cargo. 21Twelve combines vetted personnel, armoured transport, and real-time intelligence to ensure your assets reach their destination — intact, on time, and untouched.
+    </p>
+    <ul class="feature-list">
+      <li>Armoured vehicle transport with armed escort</li>
+      <li>GPS & satellite real-time cargo tracking</li>
+      <li>Pre-route threat intelligence & risk assessment</li>
+      <li>Secure warehousing & chain-of-custody documentation</li>
+      <li>Compliance with national & international freight regulations</li>
+      <li>24/7 operations command & incident response</li>
+    </ul>
+  </div>
+  <div class="pillar pillar-fire">
+    <div class="pillar-bg-num">02</div>
+    <div class="pillar-icon-wrap">🔥</div>
+    <div class="section-tag">Core Capability 02</div>
+    <h2 class="pillar-title">Fire Retardation Solutions</h2>
+    <p class="pillar-desc">
+      Passive and active fire retardation systems engineered to suppress, delay, and contain fire across industrial, commercial, and infrastructure environments. We protect lives, assets, and continuity before fire takes hold.
+    </p>
+    <ul class="feature-list">
+      <li>Intumescent & fire-retardant coating application</li>
+      <li>Structural fire protection for steel & timber</li>
+      <li>Fire-rated barrier installation & compartmentation</li>
+      <li>Suppression system design, supply & commissioning</li>
+      <li>Compliance auditing & fire risk assessment</li>
+      <li>Maintenance contracts & emergency response support</li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- ── WHY 21TWELVE ── -->
+<section class="why-section animate-in" id="about">
+  <div>
+    <div class="section-tag">Why 21Twelve</div>
+    <h2 class="section-title">BUILT FOR HIGH-STAKES ENVIRONMENTS</h2>
+    <p class="section-body">
+      Where security and fire protection intersect — at critical infrastructure, logistics hubs, and high-value facilities — 21Twelve provides the integrated expertise that single-discipline firms cannot. Our dual-capability model means fewer vendors, tighter coordination, and stronger outcomes.
+    </p>
+    <br><br>
+    <a href="#contact" class="btn-primary">Partner With Us</a>
+  </div>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-card-num">01</div>
+      <div class="why-card-title">Dual Expertise</div>
+      <div class="why-card-desc">The only provider combining security freight and fire retardation under one operational command.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-card-num">02</div>
+      <div class="why-card-title">Proven Personnel</div>
+      <div class="why-card-desc">All operatives are vetted, certified, and trained to handle high-pressure incidents.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-card-num">03</div>
+      <div class="why-card-title">Regulatory Ready</div>
+      <div class="why-card-desc">Fully compliant with freight security, fire safety, and occupational health standards.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-card-num">04</div>
+      <div class="why-card-title">Rapid Deployment</div>
+      <div class="why-card-desc">Emergency-ready teams and equipment staged for swift mobilisation across regions.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-card-num">05</div>
+      <div class="why-card-title">Custom Engineering</div>
+      <div class="why-card-desc">Solutions designed around your site, cargo, and risk profile — never off-the-shelf.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-card-num">06</div>
+      <div class="why-card-title">24/7 Command</div>
+      <div class="why-card-desc">Round-the-clock operations monitoring with direct escalation to senior response teams.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── SOLUTIONS DETAIL ── -->
+<section class="solutions-section animate-in" id="security">
+  <div class="solutions-header">
+    <div>
+      <div class="section-tag">Our Offerings</div>
+      <h2 class="section-title">FULL-SPECTRUM PROTECTION SERVICES</h2>
+    </div>
+    <p class="section-body">
+      Every solution we deliver is purpose-built — combining technical rigour with operational intelligence to eliminate risk at every point.
+    </p>
+  </div>
+  <div class="solutions-grid">
+    <div class="sol-card">
+      <div class="sol-card-type">Security Freight</div>
+      <div class="sol-card-title">Armoured Cargo Transport</div>
+      <div class="sol-card-desc">Specialised armoured vehicles for cash, valuables, pharmaceuticals, electronics, and sensitive government freight with full chain-of-custody.</div>
+      <div class="sol-card-arrow">↗</div>
+    </div>
+    <div class="sol-card">
+      <div class="sol-card-type">Security Freight</div>
+      <div class="sol-card-title">Route Intelligence & Risk Planning</div>
+      <div class="sol-card-desc">Pre-deployment threat mapping, route analysis, and contingency protocols developed by experienced security analysts.</div>
+      <div class="sol-card-arrow">↗</div>
+    </div>
+    <div class="sol-card">
+      <div class="sol-card-type">Security Freight</div>
+      <div class="sol-card-title">Secure Warehousing</div>
+      <div class="sol-card-desc">Access-controlled, monitored storage facilities for high-value goods with real-time inventory management and compliance documentation.</div>
+      <div class="sol-card-arrow">↗</div>
+    </div>
+    <div class="sol-card" id="fire">
+      <div class="sol-card-type">Fire Retardation</div>
+      <div class="sol-card-title">Structural Fire Protection</div>
+      <div class="sol-card-desc">Intumescent coatings and fire-retardant treatments for steel, timber, and composite structures to meet fire rating requirements.</div>
+      <div class="sol-card-arrow">↗</div>
+    </div>
+    <div class="sol-card">
+      <div class="sol-card-type">Fire Retardation</div>
+      <div class="sol-card-title">Fire Suppression Systems</div>
+      <div class="sol-card-desc">Design, supply, and commissioning of sprinkler, gaseous, and foam suppression systems for industrial and commercial facilities.</div>
+      <div class="sol-card-arrow">↗</div>
+    </div>
+    <div class="sol-card">
+      <div class="sol-card-type">Fire Retardation</div>
+      <div class="sol-card-title">Compartmentation & Barriers</div>
+      <div class="sol-card-desc">Fire-rated wall, floor, and ceiling barrier systems that contain spread and protect evacuation routes in complex built environments.</div>
+      <div class="sol-card-arrow">↗</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── INDUSTRIES ── -->
+<section class="industries-section animate-in" id="industries">
+  <div class="industries-header">
+    <div class="section-tag" style="justify-content:center;">Sectors We Serve</div>
+    <h2 class="section-title">INDUSTRIES WE PROTECT</h2>
+    <p class="section-body">From extraction to infrastructure, 21Twelve serves industries where the cost of risk is measured in more than money.</p>
+  </div>
+  <div class="industry-grid">
+    <div class="industry-item">
+      <span class="industry-icon">🏗️</span>
+      <div class="industry-name">Construction & Infrastructure</div>
+      <div class="industry-sub">Fire protection & secure logistics</div>
+    </div>
+    <div class="industry-item">
+      <span class="industry-icon">⛽</span>
+      <div class="industry-name">Oil, Gas & Mining</div>
+      <div class="industry-sub">Fire retardation & asset security</div>
+    </div>
+    <div class="industry-item">
+      <span class="industry-icon">🏦</span>
+      <div class="industry-name">Financial & Banking</div>
+      <div class="industry-sub">Cash & valuables transport</div>
+    </div>
+    <div class="industry-item">
+      <span class="industry-icon">💊</span>
+      <div class="industry-name">Pharmaceutical</div>
+      <div class="industry-sub">Regulated, cold-chain security</div>
+    </div>
+    <div class="industry-item">
+      <span class="industry-icon">🏛️</span>
+      <div class="industry-name">Government & Defence</div>
+      <div class="industry-sub">Sensitive cargo & facility protection</div>
+    </div>
+    <div class="industry-item">
+      <span class="industry-icon">🏭</span>
+      <div class="industry-name">Manufacturing & Industrial</div>
+      <div class="industry-sub">Fire systems & freight security</div>
+    </div>
+    <div class="industry-item">
+      <span class="industry-icon">🔬</span>
+      <div class="industry-name">Technology & Data Centres</div>
+      <div class="industry-sub">Fire suppression & secure transport</div>
+    </div>
+    <div class="industry-item">
+      <span class="industry-icon">🚢</span>
+      <div class="industry-name">Ports & Logistics Hubs</div>
+      <div class="industry-sub">End-to-end freight security</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── CTA ── -->
+<div class="cta-section animate-in" id="contact">
+  <div>
+    <h2 class="cta-title">READY TO PROTECT WHAT MATTERS MOST?</h2>
+    <p class="cta-sub">Speak with a 21Twelve specialist about your security freight or fire retardation requirements. We'll engineer a solution built around your risk profile.</p>
+  </div>
+  <a href="mailto:info@21twelve.com" class="btn-white">Request a Consultation</a>
+</div>
+
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-name">21<span>TWELVE</span></div>
+      <p class="footer-brand-desc">Integrated security freight and fire retardation solutions for industries where protection is paramount.</p>
+      <div style="display:flex;gap:0.8rem;">
+        <div class="cert-badge">ISO Certified</div>
+        <div class="cert-badge">PSIRA Compliant</div>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Security Freight</div>
+      <ul class="footer-links">
+        <li><a href="#">Armoured Transport</a></li>
+        <li><a href="#">Route Risk Planning</a></li>
+        <li><a href="#">Secure Warehousing</a></li>
+        <li><a href="#">Cash-In-Transit</a></li>
+        <li><a href="#">Cargo Tracking</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Fire Retardation</div>
+      <ul class="footer-links">
+        <li><a href="#">Structural Protection</a></li>
+        <li><a href="#">Suppression Systems</a></li>
+        <li><a href="#">FR Coatings</a></li>
+        <li><a href="#">Compartmentation</a></li>
+        <li><a href="#">Fire Risk Audits</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="#">About 21Twelve</a></li>
+        <li><a href="#">Industries Served</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">News & Insights</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 21Twelve (Pty) Ltd. All rights reserved.</div>
+    <div style="display:flex;gap:2rem;">
+      <a href="#" style="font-family:'Courier Prime',monospace;font-size:0.62rem;letter-spacing:0.1em;color:rgba(184,200,212,0.35);text-decoration:none;">Privacy Policy</a>
+      <a href="#" style="font-family:'Courier Prime',monospace;font-size:0.62rem;letter-spacing:0.1em;color:rgba(184,200,212,0.35);text-decoration:none;">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  // Scroll-triggered animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+
+  document.querySelectorAll('.animate-in').forEach(el => observer.observe(el));
+
+
+  // Smooth nav active state
+  const sections = document.querySelectorAll('section[id], div[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      const top = sec.offsetTop - 100;
+      if (window.scrollY >= top) current = sec.getAttribute('id');
+    });
+    navLinks.forEach(link => {
+      link.style.color = link.getAttribute('href') === `#${current}` ? 'var(--amber)' : '';
+    });
+  });
+</script>
+
+
+</body>
+</html>
