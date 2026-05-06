@@ -1,0 +1,1717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>21Twelve Africa | Intelligent Security Solutions</title>
+  <meta name="description" content="Advanced smart lock technology and fire suppression systems for industrial, logistics and commercial environments across Africa." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================================
+       DESIGN TOKENS
+    ============================================================ */
+    :root {
+      --bg-base:        #090B0F;
+      --bg-layer:       #111520;
+      --bg-card:        #171C2B;
+      --bg-card-hover:  #1E2438;
+      --border:         rgba(255,255,255,0.07);
+      --border-hover:   rgba(255,255,255,0.14);
+      --amber:          #E8A020;
+      --amber-dim:      rgba(232,160,32,0.12);
+      --amber-glow:     rgba(232,160,32,0.25);
+      --steel:          #2E7FC0;
+      --steel-dim:      rgba(46,127,192,0.12);
+      --text-primary:   #F0EEE8;
+      --text-secondary: #9098A8;
+      --text-muted:     #5A6070;
+      --success:        #3CA862;
+      --danger:         #D94F4F;
+      --radius-sm:      4px;
+      --radius-md:      8px;
+      --radius-lg:      14px;
+      --radius-xl:      20px;
+      --font-display:   'Bebas Neue', sans-serif;
+      --font-body:      'DM Sans', sans-serif;
+      --font-mono:      'DM Mono', monospace;
+      --max-width:      1200px;
+      --transition:     200ms cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      background: var(--bg-base);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-weight: 400;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; font-family: var(--font-body); border: none; background: none; }
+    ul { list-style: none; }
+
+    /* ============================================================
+       UTILITY CLASSES
+    ============================================================ */
+    .container { width: 100%; max-width: var(--max-width); margin: 0 auto; padding: 0 2rem; }
+    .section-pad { padding: 7rem 0; }
+    .section-pad-sm { padding: 4rem 0; }
+    .text-amber { color: var(--amber); }
+    .text-muted { color: var(--text-secondary); }
+    .tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--amber); background: var(--amber-dim);
+      border: 1px solid rgba(232,160,32,0.2);
+      padding: 5px 12px; border-radius: 100px;
+    }
+    .tag--steel {
+      color: var(--steel); background: var(--steel-dim);
+      border-color: rgba(46,127,192,0.2);
+    }
+    .divider {
+      width: 100%; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border) 20%, var(--border) 80%, transparent);
+    }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+    .flex-center { display: flex; align-items: center; justify-content: center; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+
+    /* ============================================================
+       TYPOGRAPHY
+    ============================================================ */
+    h1, h2, h3, h4, h5, h6 { font-weight: 500; line-height: 1.15; }
+    .display-xl {
+      font-family: var(--font-display);
+      font-size: clamp(3.8rem, 8vw, 8rem);
+      line-height: 0.95; letter-spacing: 0.01em;
+    }
+    .display-lg {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 5rem);
+      letter-spacing: 0.01em; line-height: 1;
+    }
+    .display-md {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      letter-spacing: 0.01em;
+    }
+    .lead { font-size: 1.125rem; font-weight: 300; color: var(--text-secondary); line-height: 1.75; }
+    .body-sm { font-size: 0.875rem; color: var(--text-secondary); }
+
+    /* ============================================================
+       BUTTONS
+    ============================================================ */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-body); font-size: 0.9rem; font-weight: 500;
+      padding: 0.75rem 1.75rem; border-radius: var(--radius-md);
+      transition: all var(--transition); white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--amber); color: #0B0D11;
+      border: 1px solid var(--amber);
+    }
+    .btn-primary:hover { background: #F0B030; border-color: #F0B030; transform: translateY(-1px); }
+    .btn-ghost {
+      background: transparent; color: var(--text-primary);
+      border: 1px solid var(--border-hover);
+    }
+    .btn-ghost:hover { border-color: var(--amber); color: var(--amber); transform: translateY(-1px); }
+    .btn-steel {
+      background: var(--steel); color: #fff;
+      border: 1px solid var(--steel);
+    }
+    .btn-steel:hover { background: #3A8FD0; transform: translateY(-1px); }
+    .btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    /* ============================================================
+       CARD
+    ============================================================ */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .card:hover { border-color: var(--border-hover); background: var(--bg-card-hover); }
+    .card--amber:hover { border-color: rgba(232,160,32,0.3); }
+    .card--featured {
+      border-color: rgba(232,160,32,0.3);
+      background: linear-gradient(135deg, var(--bg-card), rgba(232,160,32,0.04));
+    }
+
+    /* ============================================================
+       NAVIGATION
+    ============================================================ */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(9,11,15,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 68px; gap: 2rem;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 12px;
+      font-family: var(--font-display); font-size: 1.6rem; letter-spacing: 0.04em;
+    }
+    .nav-logo .logo-icon {
+      width: 36px; height: 36px; background: var(--amber);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nav-logo .logo-icon svg { width: 20px; height: 20px; color: #0B0D11; }
+    .nav-links {
+      display: flex; align-items: center; gap: 0.25rem; flex: 1; justify-content: center;
+    }
+    .nav-links a {
+      font-size: 0.875rem; font-weight: 500; color: var(--text-secondary);
+      padding: 0.5rem 0.9rem; border-radius: var(--radius-sm);
+      transition: color var(--transition), background var(--transition);
+    }
+    .nav-links a:hover { color: var(--text-primary); background: rgba(255,255,255,0.05); }
+    .nav-links a.active { color: var(--amber); }
+    .nav-cta { display: flex; align-items: center; gap: 0.75rem; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; }
+    .hamburger span { width: 22px; height: 2px; background: var(--text-primary); border-radius: 2px; transition: all 0.3s; }
+
+    /* Mobile nav */
+    .mobile-nav {
+      display: none; flex-direction: column; gap: 0;
+      background: var(--bg-layer); border-top: 1px solid var(--border);
+      padding: 1rem 0; position: absolute; top: 68px; left: 0; right: 0;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      padding: 0.9rem 2rem; font-size: 1rem; font-weight: 500;
+      color: var(--text-secondary); border-bottom: 1px solid var(--border);
+      transition: color var(--transition);
+    }
+    .mobile-nav a:hover { color: var(--amber); }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    #hero {
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+      padding: 120px 0 6rem; position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; pointer-events: none;
+    }
+    .hero-bg::before {
+      content: '';
+      position: absolute; top: -20%; right: -10%;
+      width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(232,160,32,0.06) 0%, transparent 65%);
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute; bottom: 10%; left: -10%;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(46,127,192,0.05) 0%, transparent 65%);
+    }
+    .hero-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center;
+    }
+    .hero-eyebrow { margin-bottom: 1.5rem; }
+    .hero-headline { margin-bottom: 1.5rem; }
+    .hero-headline .line-highlight { color: var(--amber); }
+    .hero-sub { margin-bottom: 2.5rem; max-width: 480px; }
+    .hero-actions { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    .hero-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border); border-radius: var(--radius-lg);
+      overflow: hidden; margin-top: 2.5rem;
+    }
+    .stat-item {
+      background: var(--bg-layer); padding: 1.25rem 1.5rem; text-align: center;
+    }
+    .stat-num { font-family: var(--font-display); font-size: 2.2rem; color: var(--amber); }
+    .stat-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
+    .hero-visual {
+      position: relative; display: flex; align-items: center; justify-content: center;
+    }
+    .hero-device {
+      width: 100%; max-width: 480px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-xl); padding: 2.5rem;
+      position: relative;
+    }
+    .hero-device::before {
+      content: ''; position: absolute; inset: -1px; border-radius: var(--radius-xl);
+      background: linear-gradient(135deg, rgba(232,160,32,0.2) 0%, transparent 50%, rgba(46,127,192,0.1) 100%);
+      z-index: -1;
+    }
+    .device-header {
+      display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;
+    }
+    .device-title { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success); box-shadow: 0 0 8px rgba(60,168,98,0.5); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+    .lock-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin-bottom: 1rem; }
+    .lock-item {
+      background: var(--bg-base); border: 1px solid var(--border);
+      border-radius: var(--radius-md); padding: 1rem; cursor: pointer;
+      transition: all var(--transition);
+    }
+    .lock-item:hover, .lock-item.active { border-color: var(--amber); background: var(--amber-dim); }
+    .lock-item-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 4px; }
+    .lock-item-status { font-size: 0.875rem; font-weight: 500; }
+    .lock-item-status.secured { color: var(--success); }
+    .lock-item-status.unlocked { color: var(--amber); }
+    .device-activity { border-top: 1px solid var(--border); padding-top: 1rem; }
+    .activity-label { font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 0.75rem; }
+    .activity-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 0.8rem;
+    }
+    .activity-item:last-child { border-bottom: none; }
+    .activity-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .activity-dot.green { background: var(--success); }
+    .activity-dot.amber { background: var(--amber); }
+    .activity-dot.blue { background: var(--steel); }
+    .activity-time { margin-left: auto; font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-muted); }
+
+    /* ============================================================
+       SECTION HEADERS
+    ============================================================ */
+    .section-header { margin-bottom: 3.5rem; }
+    .section-header .tag { margin-bottom: 1rem; }
+    .section-header p { max-width: 560px; }
+    .section-header.centered { text-align: center; }
+    .section-header.centered p { margin: 0.75rem auto 0; }
+
+    /* ============================================================
+       PRODUCTS — SMART LOCKS
+    ============================================================ */
+    .product-tabs {
+      display: flex; gap: 0; background: var(--bg-layer);
+      border: 1px solid var(--border); border-radius: var(--radius-md);
+      padding: 4px; margin-bottom: 3rem; width: fit-content;
+    }
+    .tab-btn {
+      padding: 0.6rem 1.4rem; border-radius: calc(var(--radius-md) - 2px);
+      font-size: 0.875rem; font-weight: 500; color: var(--text-secondary);
+      transition: all var(--transition);
+    }
+    .tab-btn.active { background: var(--bg-card); color: var(--text-primary); }
+    .product-panel { display: none; }
+    .product-panel.active { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .product-visual {
+      aspect-ratio: 1; background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-xl); display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .product-visual::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(circle at 60% 40%, var(--amber-dim), transparent 60%);
+    }
+    .product-icon-lg { width: 120px; height: 120px; }
+    .product-specs { display: flex; flex-direction: column; gap: 1.25rem; }
+    .product-badge-group { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+    .product-headline { margin: 0.5rem 0 0.75rem; }
+    .product-desc { color: var(--text-secondary); font-size: 0.9375rem; line-height: 1.7; margin-bottom: 1.5rem; }
+    .spec-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1.5rem; }
+    .spec-item {
+      background: var(--bg-base); border: 1px solid var(--border);
+      border-radius: var(--radius-md); padding: 0.75rem 1rem;
+    }
+    .spec-key { font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 3px; }
+    .spec-val { font-size: 0.875rem; font-weight: 500; color: var(--text-primary); }
+    .feature-list { display: flex; flex-direction: column; gap: 0.5rem; }
+    .feature-item { display: flex; align-items: flex-start; gap: 10px; font-size: 0.9rem; color: var(--text-secondary); }
+    .feature-item::before { content: ''; width: 16px; height: 16px; border-radius: 50%; background: var(--amber-dim); border: 1px solid rgba(232,160,32,0.3); flex-shrink: 0; margin-top: 2px; display: block; }
+
+    /* ============================================================
+       FIRE SUPPRESSION
+    ============================================================ */
+    .fire-hero {
+      background: var(--bg-layer); border: 1px solid var(--border);
+      border-radius: var(--radius-xl); padding: 3rem; margin-bottom: 2rem;
+      position: relative; overflow: hidden;
+    }
+    .fire-hero::before {
+      content: ''; position: absolute; top: -30%; right: -5%;
+      width: 400px; height: 400px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(217,79,79,0.1) 0%, transparent 65%);
+    }
+    .fire-hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; position: relative; }
+    .fireblock-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: #D94F4F; background: rgba(217,79,79,0.1); border: 1px solid rgba(217,79,79,0.2);
+      padding: 5px 12px; border-radius: 100px; margin-bottom: 1rem;
+    }
+    .temp-badge {
+      font-family: var(--font-display); font-size: 3.5rem; color: var(--amber);
+      display: block; margin: 1rem 0 0.25rem;
+    }
+    .fire-stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+    .fire-stat {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-md); padding: 1rem 1.25rem;
+    }
+    .fire-stat-num { font-family: var(--font-display); font-size: 1.8rem; color: var(--amber); }
+    .fire-stat-label { font-size: 0.75rem; color: var(--text-muted); }
+    .fire-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+    .fire-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 1.75rem;
+      transition: border-color var(--transition);
+    }
+    .fire-card:hover { border-color: rgba(217,79,79,0.25); }
+    .fire-card-icon {
+      width: 44px; height: 44px; border-radius: var(--radius-md);
+      background: rgba(217,79,79,0.1); border: 1px solid rgba(217,79,79,0.2);
+      display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;
+    }
+    .fire-card-icon svg { width: 22px; height: 22px; color: #D94F4F; }
+    .cert-strip {
+      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+      background: var(--bg-layer); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 1.25rem 1.75rem; margin-top: 2rem;
+    }
+    .cert-label { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-right: 0.5rem; }
+    .cert-badge {
+      font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500;
+      padding: 4px 10px; border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.05); border: 1px solid var(--border-hover);
+    }
+
+    /* ============================================================
+       HOW IT WORKS / TECHNOLOGY
+    ============================================================ */
+    .tech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .tech-card {
+      background: var(--bg-layer); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 2rem;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+    .tech-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+    .tech-number {
+      font-family: var(--font-display); font-size: 3rem;
+      color: rgba(232,160,32,0.12); line-height: 1; margin-bottom: 1rem;
+    }
+    .tech-card h4 { font-size: 1.125rem; margin-bottom: 0.5rem; }
+    .tech-card p { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.7; }
+    .connectivity-bar {
+      background: var(--bg-layer); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 2rem; margin-top: 2rem;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+    }
+    .conn-item { text-align: center; padding: 1rem; }
+    .conn-icon {
+      width: 40px; height: 40px; border-radius: var(--radius-md);
+      background: var(--amber-dim); border: 1px solid rgba(232,160,32,0.2);
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem;
+    }
+    .conn-icon svg { width: 20px; height: 20px; color: var(--amber); }
+    .conn-label { font-size: 0.75rem; font-weight: 500; }
+    .conn-sub { font-size: 0.7rem; color: var(--text-muted); }
+
+    /* ============================================================
+       SHOP / eCOMMERCE
+    ============================================================ */
+    .shop-filter-bar {
+      display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; margin-bottom: 2.5rem;
+    }
+    .filter-btn {
+      font-size: 0.8rem; font-weight: 500; padding: 6px 16px;
+      border: 1px solid var(--border); border-radius: 100px;
+      color: var(--text-secondary); transition: all var(--transition);
+    }
+    .filter-btn:hover, .filter-btn.active {
+      border-color: var(--amber); color: var(--amber); background: var(--amber-dim);
+    }
+    .shop-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .shop-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-xl); overflow: hidden;
+      transition: all var(--transition);
+    }
+    .shop-card:hover { border-color: var(--border-hover); transform: translateY(-3px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+    .shop-card-img {
+      aspect-ratio: 4/3; background: var(--bg-layer);
+      display: flex; align-items: center; justify-content: center;
+      border-bottom: 1px solid var(--border); position: relative;
+    }
+    .shop-card-badge {
+      position: absolute; top: 12px; left: 12px;
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 100px;
+    }
+    .badge-new { background: var(--amber-dim); color: var(--amber); border: 1px solid rgba(232,160,32,0.3); }
+    .badge-hot { background: rgba(217,79,79,0.12); color: #D94F4F; border: 1px solid rgba(217,79,79,0.3); }
+    .shop-card-body { padding: 1.5rem; }
+    .shop-card-category { font-size: 0.7rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 0.4rem; }
+    .shop-card-name { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem; line-height: 1.3; }
+    .shop-card-desc { font-size: 0.8125rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.25rem; }
+    .shop-card-footer { display: flex; align-items: center; justify-content: space-between; }
+    .shop-price { font-family: var(--font-display); font-size: 1.6rem; color: var(--amber); }
+    .shop-price-sub { font-size: 0.7rem; color: var(--text-muted); }
+    .add-to-cart {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 0.8rem; font-weight: 500; padding: 8px 16px;
+      background: var(--amber-dim); color: var(--amber);
+      border: 1px solid rgba(232,160,32,0.3); border-radius: var(--radius-md);
+      transition: all var(--transition);
+    }
+    .add-to-cart:hover { background: var(--amber); color: #0B0D11; }
+    .add-to-cart svg { width: 14px; height: 14px; }
+    .cart-indicator {
+      display: flex; align-items: center; gap: 0.75rem;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 1rem 1.5rem; margin-bottom: 2rem;
+    }
+    .cart-count { font-family: var(--font-display); font-size: 1.4rem; color: var(--amber); min-width: 2rem; }
+    .cart-label { font-size: 0.8rem; color: var(--text-muted); }
+    .cart-total { margin-left: auto; font-size: 0.9rem; font-weight: 500; }
+
+    /* ============================================================
+       CONTACT FORM
+    ============================================================ */
+    .contact-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 4rem; align-items: start; }
+    .contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
+    .contact-detail {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 1.25rem 1.5rem; background: var(--bg-card);
+      border: 1px solid var(--border); border-radius: var(--radius-lg);
+    }
+    .contact-detail-icon {
+      width: 40px; height: 40px; border-radius: var(--radius-md); flex-shrink: 0;
+      background: var(--amber-dim); border: 1px solid rgba(232,160,32,0.2);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .contact-detail-icon svg { width: 18px; height: 18px; color: var(--amber); }
+    .contact-detail-label { font-size: 0.7rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 3px; }
+    .contact-detail-value { font-size: 0.9rem; font-weight: 500; }
+    .form-wrap {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-xl); padding: 2.5rem;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; }
+    .form-group label { font-size: 0.8125rem; font-weight: 500; color: var(--text-secondary); }
+    .form-group input, .form-group select, .form-group textarea {
+      background: var(--bg-base); border: 1px solid var(--border);
+      border-radius: var(--radius-md); color: var(--text-primary);
+      font-family: var(--font-body); font-size: 0.9rem; padding: 0.75rem 1rem;
+      transition: border-color var(--transition), box-shadow var(--transition);
+      outline: none; width: 100%;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color: rgba(232,160,32,0.5);
+      box-shadow: 0 0 0 3px rgba(232,160,32,0.08);
+    }
+    .form-group select { appearance: none; cursor: pointer; }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: var(--text-muted); }
+    .form-submit { width: 100%; padding: 1rem; font-size: 1rem; font-weight: 600; margin-top: 0.5rem; }
+    .form-note { text-align: center; margin-top: 1rem; font-size: 0.78rem; color: var(--text-muted); }
+    #form-success {
+      display: none; text-align: center; padding: 2rem;
+      background: rgba(60,168,98,0.08); border: 1px solid rgba(60,168,98,0.2);
+      border-radius: var(--radius-lg); margin-top: 1rem;
+    }
+    #form-success p { color: var(--success); font-size: 0.95rem; }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      background: var(--bg-layer); border-top: 1px solid var(--border);
+      padding: 4rem 0 2rem;
+    }
+    .footer-main { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+    .footer-brand p { font-size: 0.875rem; color: var(--text-muted); margin: 1rem 0 1.5rem; max-width: 300px; line-height: 1.7; }
+    .footer-col h5 { font-size: 0.8rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 1rem; }
+    .footer-col ul { display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer-col ul li a { font-size: 0.875rem; color: var(--text-secondary); transition: color var(--transition); }
+    .footer-col ul li a:hover { color: var(--amber); }
+    .footer-bottom {
+      padding-top: 2rem; border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-bottom p { font-size: 0.8rem; color: var(--text-muted); }
+    .backend-note {
+      margin-top: 3rem; background: var(--bg-card);
+      border: 1px solid rgba(46,127,192,0.2); border-radius: var(--radius-lg);
+      padding: 2rem;
+    }
+    .backend-note h4 { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--steel); margin-bottom: 1rem; }
+    .backend-stack { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+    .stack-item {
+      background: var(--bg-base); border: 1px solid var(--border);
+      border-radius: var(--radius-md); padding: 0.875rem 1rem;
+    }
+    .stack-item-title { font-size: 0.8125rem; font-weight: 600; margin-bottom: 2px; }
+    .stack-item-desc { font-size: 0.75rem; color: var(--text-muted); }
+
+    /* ============================================================
+       SCROLL ANIMATIONS
+    ============================================================ */
+    .reveal {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.6s cubic-bezier(0.4,0,0.2,1), transform 0.6s cubic-bezier(0.4,0,0.2,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 1024px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .hero-visual { order: -1; }
+      .hero-device { max-width: 100%; }
+      .footer-main { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta .btn-ghost { display: none; }
+      .hamburger { display: flex; }
+      .section-pad { padding: 4.5rem 0; }
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      .product-panel.active { grid-template-columns: 1fr; }
+      .fire-hero-inner { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .tech-grid { grid-template-columns: 1fr; }
+      .shop-grid { grid-template-columns: 1fr; }
+      .fire-cards { grid-template-columns: 1fr; }
+      .connectivity-bar { grid-template-columns: repeat(2, 1fr); }
+      .hero-stats { grid-template-columns: 1fr; }
+      .footer-main { grid-template-columns: 1fr; gap: 2rem; }
+      .backend-stack { grid-template-columns: 1fr; }
+      .spec-list { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .container { padding: 0 1.25rem; }
+      .display-xl { font-size: 3rem; }
+    }
+
+    /* ============================================================
+       PAGE SECTIONS (display toggling)
+    ============================================================ */
+    .page-section { display: none; }
+    .page-section.active { display: block; }
+
+    /* ============================================================
+       NOTIFICATION TOAST
+    ============================================================ */
+    #toast {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 2000;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 1rem 1.5rem;
+      display: flex; align-items: center; gap: 0.75rem;
+      transform: translateY(100px); opacity: 0;
+      transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+      max-width: 320px; box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+    #toast.show { transform: translateY(0); opacity: 1; }
+    #toast .toast-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success); flex-shrink: 0; }
+    #toast p { font-size: 0.875rem; }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAVIGATION
+============================================================ -->
+<nav id="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a class="nav-logo" href="#" onclick="showSection('home')">
+        <div class="logo-icon">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd"/></svg>
+        </div>
+        21TWELVE
+      </a>
+      <div class="nav-links">
+        <a href="#" onclick="showSection('home')">Home</a>
+        <a href="#" onclick="showSection('smart-locks')">Smart Locks</a>
+        <a href="#" onclick="showSection('fire')">Fire Suppression</a>
+        <a href="#" onclick="showSection('technology')">Technology</a>
+        <a href="#" onclick="showSection('shop')">Shop</a>
+        <a href="#" onclick="showSection('contact')">Contact</a>
+      </div>
+      <div class="nav-cta">
+        <a class="btn btn-ghost" href="#" onclick="showSection('contact')">Get in Touch</a>
+        <a class="btn btn-primary" href="#" onclick="showSection('shop')">View Products</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-nav" id="mobile-nav">
+      <a href="#" onclick="showSection('home');closeMobileNav()">Home</a>
+      <a href="#" onclick="showSection('smart-locks');closeMobileNav()">Smart Locks</a>
+      <a href="#" onclick="showSection('fire');closeMobileNav()">Fire Suppression</a>
+      <a href="#" onclick="showSection('technology');closeMobileNav()">Technology</a>
+      <a href="#" onclick="showSection('shop');closeMobileNav()">Shop</a>
+      <a href="#" onclick="showSection('contact');closeMobileNav()">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Toast -->
+<div id="toast">
+  <div class="toast-dot"></div>
+  <p id="toast-msg">Item added to cart</p>
+</div>
+
+<!-- ============================================================
+     HOME PAGE
+============================================================ -->
+<div id="home" class="page-section active">
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="hero-eyebrow reveal">
+            <span class="tag">IoT Security for Africa</span>
+          </div>
+          <h1 class="display-xl hero-headline reveal reveal-delay-1">
+            SECURE<br>
+            EVERY<br>
+            <span class="line-highlight">ASSET</span>
+          </h1>
+          <p class="lead hero-sub reveal reveal-delay-2">
+            Industrial-grade smart locks and advanced fire suppression systems — engineered for reliability across Africa's most demanding environments.
+          </p>
+          <div class="hero-actions reveal reveal-delay-3">
+            <a class="btn btn-primary" href="#" onclick="showSection('shop')">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3z"/></svg>
+              Shop Products
+            </a>
+            <a class="btn btn-ghost" href="#" onclick="showSection('contact')">Request a Demo</a>
+          </div>
+          <div class="hero-stats reveal">
+            <div class="stat-item">
+              <div class="stat-num">IP67</div>
+              <div class="stat-label">Protection Rating</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">400+</div>
+              <div class="stat-label">Degrees Controlled</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">24/7</div>
+              <div class="stat-label">Platform Visibility</div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-visual reveal reveal-delay-2">
+          <div class="hero-device">
+            <div class="device-header">
+              <span class="device-title">Argon X Platform — Live</span>
+              <div class="status-dot"></div>
+            </div>
+            <div class="lock-grid">
+              <div class="lock-item active">
+                <div class="lock-item-label">Container A-14</div>
+                <div class="lock-item-status secured">Secured</div>
+              </div>
+              <div class="lock-item">
+                <div class="lock-item-label">Truck Gate B</div>
+                <div class="lock-item-status secured">Secured</div>
+              </div>
+              <div class="lock-item">
+                <div class="lock-item-label">Cold Store 3</div>
+                <div class="lock-item-status unlocked">Access Granted</div>
+              </div>
+              <div class="lock-item">
+                <div class="lock-item-label">Unit D-07</div>
+                <div class="lock-item-status secured">Secured</div>
+              </div>
+            </div>
+            <div class="device-activity">
+              <div class="activity-label">Recent Events</div>
+              <div class="activity-item">
+                <div class="activity-dot green"></div>
+                <span>NFC access — Gate B2</span>
+                <span class="activity-time">09:42</span>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot amber"></div>
+                <span>Temp alert — Reefer 6</span>
+                <span class="activity-time">09:38</span>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot blue"></div>
+                <span>Satellite sync complete</span>
+                <span class="activity-time">09:30</span>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot green"></div>
+                <span>BLE access — Depot A</span>
+                <span class="activity-time">09:21</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OVERVIEW SECTION -->
+  <section class="section-pad" style="background: var(--bg-layer); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <div class="section-header centered reveal">
+        <span class="tag">Our Solutions</span>
+        <h2 class="display-md" style="margin-top: 0.75rem;">Built for critical infrastructure</h2>
+        <p class="lead" style="margin-top: 0.75rem; max-width: 540px; margin-left: auto; margin-right: auto;">Two integrated product lines engineered to protect assets, cargo and facilities with precision monitoring and real-time response.</p>
+      </div>
+      <div class="grid-2">
+        <div class="card card--featured reveal" onclick="showSection('smart-locks')" style="cursor:pointer;">
+          <div style="width:52px;height:52px;background:var(--amber-dim);border:1px solid rgba(232,160,32,0.2);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;">
+            <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24" style="color:var(--amber)"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <span class="tag" style="margin-bottom: 1rem;">Smart Locks</span>
+          <h3 class="display-md" style="margin-bottom: 0.75rem;">Argon X<br>Smart Lock Range</h3>
+          <p class="body-sm" style="line-height: 1.75; margin-bottom: 1.5rem;">NFC and BLE-enabled locks with encrypted credentials, real-time event logging, geo-location tracking, and satellite connectivity for remote operations.</p>
+          <a class="btn btn-ghost" href="#" onclick="showSection('smart-locks')">Explore Smart Locks</a>
+        </div>
+        <div class="card reveal reveal-delay-1" onclick="showSection('fire')" style="cursor:pointer;border-color:rgba(217,79,79,0.15);">
+          <div style="width:52px;height:52px;background:rgba(217,79,79,0.1);border:1px solid rgba(217,79,79,0.2);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;">
+            <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24" style="color:#D94F4F"><path d="M12 22c4 0 8-3.6 8-8 0-6-8-12-8-12S4 8 4 14c0 4.4 3.6 8 8 8z"/><path d="M12 22c-2.2 0-4-2.7-4-6 0-3.3 4-7 4-7s4 3.7 4 7c0 3.3-1.8 6-4 6z"/></svg>
+          </div>
+          <span class="tag" style="color:#D94F4F;background:rgba(217,79,79,0.1);border-color:rgba(217,79,79,0.2);margin-bottom:1rem;">Fire Suppression</span>
+          <h3 class="display-md" style="margin-bottom: 0.75rem;">FireBlock<br>Lithium Systems</h3>
+          <p class="body-sm" style="line-height: 1.75; margin-bottom: 1.5rem;">Specialised gel agent engineered for lithium battery fires. Reduces temperatures from 400°C-plus to below 60°C. Stops thermal runaway. CE, UKCA and BSI KITEMARK certified.</p>
+          <a class="btn btn-ghost" href="#" onclick="showSection('fire')" style="border-color:rgba(217,79,79,0.3);color:#D94F4F;">Explore Fire Systems</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY 21TWELVE -->
+  <section class="section-pad">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="tag">Why 21Twelve Africa</span>
+        <h2 class="display-lg" style="margin-top: 0.75rem; max-width: 600px;">Precision security for the African continent</h2>
+      </div>
+      <div class="grid-4">
+        <div class="card reveal">
+          <div style="font-family:var(--font-display);font-size:2.5rem;color:var(--amber);line-height:1;margin-bottom:0.75rem;">01</div>
+          <h4 style="margin-bottom: 0.5rem;">Platform Unified</h4>
+          <p class="body-sm">All locks, sensors, and events consolidate into the Argon X dashboard — single pane of glass across your entire fleet.</p>
+        </div>
+        <div class="card reveal reveal-delay-1">
+          <div style="font-family:var(--font-display);font-size:2.5rem;color:var(--amber);line-height:1;margin-bottom:0.75rem;">02</div>
+          <h4 style="margin-bottom: 0.5rem;">Satellite Ready</h4>
+          <p class="body-sm">Proprietary GEO Satellite Communication Stack bridges connectivity gaps — no cellular signal required for remote monitoring.</p>
+        </div>
+        <div class="card reveal reveal-delay-2">
+          <div style="font-family:var(--font-display);font-size:2.5rem;color:var(--amber);line-height:1;margin-bottom:0.75rem;">03</div>
+          <h4 style="margin-bottom: 0.5rem;">Industrial Grade</h4>
+          <p class="body-sm">Marine-grade stainless steel, IP67-sealed enclosures and multi-year battery autonomy engineered for Africa's harshest conditions.</p>
+        </div>
+        <div class="card reveal reveal-delay-3">
+          <div style="font-family:var(--font-display);font-size:2.5rem;color:var(--amber);line-height:1;margin-bottom:0.75rem;">04</div>
+          <h4 style="margin-bottom: 0.5rem;">Compliance Ready</h4>
+          <p class="body-sm">Encrypted key exchange, device-level authentication, full audit trails. CE, UKCA, BSI KITEMARK, and SANS1910 certified products.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- end #home -->
+
+<!-- ============================================================
+     SMART LOCKS PAGE
+============================================================ -->
+<div id="smart-locks" class="page-section">
+  <section class="section-pad" style="padding-top: 8rem;">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="tag">Argon X Smart Lock Range</span>
+        <h1 class="display-lg" style="margin: 0.75rem 0 0.75rem;">Advanced lock technology<br><span style="color:var(--amber)">redefined</span></h1>
+        <p class="lead" style="max-width: 560px;">NFC and BLE connectivity. Encrypted credentials. Unified platform visibility. Designed for containers, fleets and high-value assets.</p>
+      </div>
+
+      <div class="product-tabs reveal">
+        <button class="tab-btn active" onclick="switchTab('external')">External Locks</button>
+        <button class="tab-btn" onclick="switchTab('internal')">Internal Locks</button>
+        <button class="tab-btn" onclick="switchTab('reefer')">Reefer Monitoring</button>
+      </div>
+
+      <!-- External Tab -->
+      <div class="product-panel active" id="tab-external">
+        <div class="product-visual reveal">
+          <svg class="product-icon-lg" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="30" y="50" width="60" height="50" rx="6" fill="rgba(232,160,32,0.1)" stroke="rgba(232,160,32,0.4)" stroke-width="1.5"/>
+            <path d="M43 50V38a17 17 0 0134 0v12" stroke="rgba(232,160,32,0.7)" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="60" cy="75" r="8" fill="rgba(232,160,32,0.2)" stroke="var(--amber)" stroke-width="1.5"/>
+            <rect x="57" y="78" width="6" height="10" rx="2" fill="var(--amber)"/>
+            <circle cx="88" cy="28" r="8" fill="rgba(46,127,192,0.15)" stroke="var(--steel)" stroke-width="1"/>
+            <path d="M85 28 l2 2 l4-4" stroke="var(--steel)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="product-specs reveal reveal-delay-1">
+          <div class="product-badge-group">
+            <span class="tag">External</span>
+            <span class="tag tag--steel">IP67 Sealed</span>
+          </div>
+          <h2 class="display-md product-headline">External Smart Lock</h2>
+          <p class="product-desc">Built for industrial resilience, featuring marine-grade stainless steel housings. Ideal for container doors, truck gates and swing arms. Supports both NFC and BLE access with encrypted credentials and offers energy-harvesting or long-life rechargeable power modules for multi-year autonomy.</p>
+          <div class="spec-list">
+            <div class="spec-item"><div class="spec-key">Housing</div><div class="spec-val">Marine-grade stainless steel</div></div>
+            <div class="spec-item"><div class="spec-key">Sealing</div><div class="spec-val">IP67 rated</div></div>
+            <div class="spec-item"><div class="spec-key">Connectivity</div><div class="spec-val">NFC + BLE</div></div>
+            <div class="spec-item"><div class="spec-key">Power</div><div class="spec-val">Energy-harvesting / Rechargeable</div></div>
+            <div class="spec-item"><div class="spec-key">Tamper Detection</div><div class="spec-val">Anti-tamper alerts</div></div>
+            <div class="spec-item"><div class="spec-key">Mounting</div><div class="spec-val">Universal options</div></div>
+          </div>
+          <div class="feature-list">
+            <div class="feature-item">Encrypted credential exchange for every access event</div>
+            <div class="feature-item">Full event traceability on the Argon X platform</div>
+            <div class="feature-item">Satellite-compatible for remote site deployments</div>
+            <div class="feature-item">Multi-year battery autonomy — minimal maintenance</div>
+          </div>
+          <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+            <a class="btn btn-primary" href="#" onclick="showSection('shop')">Buy Now</a>
+            <a class="btn btn-ghost" href="#" onclick="showSection('contact')">Request Quote</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Internal Tab -->
+      <div class="product-panel" id="tab-internal">
+        <div class="product-visual reveal">
+          <svg class="product-icon-lg" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="25" y="30" width="70" height="75" rx="6" fill="rgba(46,127,192,0.08)" stroke="rgba(46,127,192,0.3)" stroke-width="1.5"/>
+            <rect x="38" y="55" width="44" height="38" rx="4" fill="rgba(232,160,32,0.08)" stroke="rgba(232,160,32,0.3)" stroke-width="1.25"/>
+            <path d="M47 55V47a13 13 0 0126 0v8" stroke="rgba(232,160,32,0.6)" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="60" cy="72" r="6" fill="rgba(232,160,32,0.15)" stroke="var(--amber)" stroke-width="1.25"/>
+            <rect x="57.5" y="74.5" width="5" height="8" rx="1.5" fill="var(--amber)"/>
+            <circle cx="90" cy="25" r="6" fill="rgba(60,168,98,0.15)" stroke="var(--success)" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="product-specs reveal reveal-delay-1">
+          <div class="product-badge-group">
+            <span class="tag">Internal</span>
+            <span class="tag tag--steel">Low Profile</span>
+          </div>
+          <h2 class="display-md product-headline">Internal Smart Lock</h2>
+          <p class="product-desc">Designed for enclosed spaces and compact compartments, providing secure low-profile protection for high-value cargo. Features concealed mounting and optional wired sensors for door position or environmental feedback. Perfect for medical shipments, telecom gear and storage units.</p>
+          <div class="spec-list">
+            <div class="spec-item"><div class="spec-key">Form Factor</div><div class="spec-val">Concealed low-profile</div></div>
+            <div class="spec-item"><div class="spec-key">Mounting</div><div class="spec-val">Concealed installation</div></div>
+            <div class="spec-item"><div class="spec-key">Connectivity</div><div class="spec-val">BLE / NFC</div></div>
+            <div class="spec-item"><div class="spec-key">Sensors</div><div class="spec-val">Optional door position + env.</div></div>
+          </div>
+          <div class="feature-list">
+            <div class="feature-item">Authorised device access only via encrypted credentials</div>
+            <div class="feature-item">Same platform visibility and reporting as external models</div>
+            <div class="feature-item">Suitable for medical-grade and sensitive cargo applications</div>
+            <div class="feature-item">Optional wired door position and environmental sensors</div>
+          </div>
+          <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+            <a class="btn btn-primary" href="#" onclick="showSection('shop')">Buy Now</a>
+            <a class="btn btn-ghost" href="#" onclick="showSection('contact')">Request Quote</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reefer Tab -->
+      <div class="product-panel" id="tab-reefer">
+        <div class="product-visual reveal">
+          <svg class="product-icon-lg" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="20" y="35" width="80" height="60" rx="5" fill="rgba(46,127,192,0.08)" stroke="rgba(46,127,192,0.3)" stroke-width="1.5"/>
+            <path d="M20 60h80" stroke="rgba(46,127,192,0.2)" stroke-width="1" stroke-dasharray="4 3"/>
+            <path d="M60 38 L60 92" stroke="rgba(46,127,192,0.2)" stroke-width="1" stroke-dasharray="4 3"/>
+            <circle cx="60" cy="65" r="12" fill="rgba(46,127,192,0.12)" stroke="var(--steel)" stroke-width="1.5"/>
+            <path d="M60 59 L60 65 L65 68" stroke="var(--steel)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M30 20 L30 32 M25 22 L35 22 M25 30 L35 30" stroke="rgba(232,160,32,0.5)" stroke-width="1.25" stroke-linecap="round"/>
+            <circle cx="88" cy="22" r="8" fill="rgba(60,168,98,0.12)" stroke="var(--success)" stroke-width="1"/>
+            <path d="M85 22 l2 2 l4-4" stroke="var(--success)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="product-specs reveal reveal-delay-1">
+          <div class="product-badge-group">
+            <span class="tag">Reefer</span>
+            <span class="tag tag--steel">Temp Monitoring</span>
+          </div>
+          <h2 class="display-md product-headline">Reefer Monitoring System</h2>
+          <p class="product-desc">Combines physical security with comprehensive environmental oversight. Continuously logs temperature, humidity and door events, triggering immediate alerts for threshold breaches that could affect cargo integrity. Satellite and cellular redundancy ensures visibility from origin to destination.</p>
+          <div class="spec-list">
+            <div class="spec-item"><div class="spec-key">Monitoring</div><div class="spec-val">Temp + Humidity + Door</div></div>
+            <div class="spec-item"><div class="spec-key">Connectivity</div><div class="spec-val">Satellite + Cellular</div></div>
+            <div class="spec-item"><div class="spec-key">Alerts</div><div class="spec-val">Real-time threshold alerts</div></div>
+            <div class="spec-item"><div class="spec-key">Use Case</div><div class="spec-val">Reefer containers & trucks</div></div>
+          </div>
+          <div class="feature-list">
+            <div class="feature-item">Refrigeration telemetry optimises cooling efficiency</div>
+            <div class="feature-item">Full cargo compliance logging from origin to destination</div>
+            <div class="feature-item">Satellite redundancy beyond cellular coverage areas</div>
+            <div class="feature-item">Extended telemetry for trucks and asset clusters</div>
+          </div>
+          <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+            <a class="btn btn-primary" href="#" onclick="showSection('shop')">Buy Now</a>
+            <a class="btn btn-ghost" href="#" onclick="showSection('contact')">Request Quote</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div><!-- end #smart-locks -->
+
+<!-- ============================================================
+     FIRE SUPPRESSION PAGE
+============================================================ -->
+<div id="fire" class="page-section">
+  <section class="section-pad" style="padding-top: 8rem;">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="fireblock-badge">Fire Suppression Technology</span>
+        <h1 class="display-lg" style="margin: 0.75rem 0 0.75rem;">Stop lithium fires<br><span style="color:#D94F4F">before they spread</span></h1>
+        <p class="lead" style="max-width: 560px;">Specialised systems for server rooms, data centres, industrial facilities and lithium battery applications. Fast-acting, automatic, and compliant with South African safety standards.</p>
+      </div>
+
+      <div class="fire-hero reveal">
+        <div class="fire-hero-inner">
+          <div>
+            <span class="fireblock-badge">FIREBLOCK LITHIUM</span>
+            <h2 class="display-md" style="margin-bottom: 0.75rem;">Unique agent.<br>Superb performance.</h2>
+            <p style="color: var(--text-secondary); font-size: 0.9375rem; line-height: 1.75; margin-bottom: 1.5rem;">A specialised gel developed to extinguish lithium-ion battery fires regardless of cell type or chemical composition. It encapsulates the battery, removes heat, and separates oxygen and fuel — stopping thermal runaway permanently.</p>
+            <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+              <a class="btn btn-primary" href="#" onclick="showSection('shop')">Order Now</a>
+              <a class="btn btn-ghost" href="#" onclick="showSection('contact')" style="border-color:rgba(217,79,79,0.3);color:#D94F4F;">Request Info</a>
+            </div>
+          </div>
+          <div>
+            <div class="fire-stats-grid">
+              <div class="fire-stat">
+                <div class="fire-stat-num">400+</div>
+                <div class="fire-stat-label">Degrees Celsius — starting temperature</div>
+              </div>
+              <div class="fire-stat">
+                <div class="fire-stat-num">&lt;60</div>
+                <div class="fire-stat-label">Degrees Celsius — after application</div>
+              </div>
+              <div class="fire-stat">
+                <div class="fire-stat-num">&lt;10%</div>
+                <div class="fire-stat-label">Runoff on flat surface application</div>
+              </div>
+              <div class="fire-stat">
+                <div class="fire-stat-num">100%</div>
+                <div class="fire-stat-label">Non-toxic and biodegradable formulation</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fire-cards">
+        <div class="fire-card reveal">
+          <div class="fire-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 22c4 0 8-3.6 8-8 0-6-8-12-8-12S4 8 4 14c0 4.4 3.6 8 8 8z"/></svg>
+          </div>
+          <h4 style="margin-bottom:0.5rem;">Flame Knockdown</h4>
+          <p class="body-sm" style="line-height:1.7;">Tremendously strong flame knockdown and cooling effect. Reduces lithium-ion fire temperature from 400 degrees-plus to below 60 degrees immediately.</p>
+        </div>
+        <div class="fire-card reveal reveal-delay-1">
+          <div class="fire-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M8 12l2 2 4-4"/></svg>
+          </div>
+          <h4 style="margin-bottom:0.5rem;">Thermal Propagation Barrier</h4>
+          <p class="body-sm" style="line-height:1.7;">Acts as a fireblock between adjacent cells in a battery pack, preventing thermal propagation from spreading to neighbouring cells.</p>
+        </div>
+        <div class="fire-card reveal reveal-delay-2">
+          <div class="fire-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          </div>
+          <h4 style="margin-bottom:0.5rem;">Reignition Prevention</h4>
+          <p class="body-sm" style="line-height:1.7;">Unique formula insulates the cells and prevents reignition. Stops thermal runaway by extracting heat and halting the underlying chemical reaction.</p>
+        </div>
+        <div class="fire-card reveal">
+          <div class="fire-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M21 10H3M16 2l5 8-5 8M8 2l-5 8 5 8"/></svg>
+          </div>
+          <h4 style="margin-bottom:0.5rem;">Superior Encapsulation</h4>
+          <p class="body-sm" style="line-height:1.7;">Covers and affixes directly to the battery surface, forming a protective layer that removes heat and separates oxygen and fuel from each other.</p>
+        </div>
+        <div class="fire-card reveal reveal-delay-1">
+          <div class="fire-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <h4 style="margin-bottom:0.5rem;">Minimal Runoff</h4>
+          <p class="body-sm" style="line-height:1.7;">Less than 10 percent runoff of the amount sprayed on a flat surface, reducing secondary water damage compared to conventional suppression methods.</p>
+        </div>
+        <div class="fire-card reveal reveal-delay-2">
+          <div class="fire-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+          </div>
+          <h4 style="margin-bottom:0.5rem;">Environmentally Safe</h4>
+          <p class="body-sm" style="line-height:1.7;">Non-toxic and fully biodegradable composition. Safe for enclosed environments including server rooms, data centres and commercial buildings.</p>
+        </div>
+      </div>
+
+      <div class="cert-strip reveal">
+        <span class="cert-label">Certifications</span>
+        <span class="cert-badge">CE Mark</span>
+        <span class="cert-badge">UKCA Mark</span>
+        <span class="cert-badge">BSI KITEMARK EN-3 KM 57904</span>
+        <span class="cert-badge">SANS1910 KM 805775</span>
+        <span class="cert-badge">UK Manufactured</span>
+        <span style="margin-left: auto; font-size: 0.78rem; color: var(--text-muted);">All extinguishers manufactured in the UK</span>
+      </div>
+
+      <div style="margin-top: 3rem;" class="reveal">
+        <h3 class="display-md" style="margin-bottom: 1.5rem;">Additional fire safety solutions</h3>
+        <div class="grid-3">
+          <div class="card">
+            <h4 style="margin-bottom:0.5rem;">Automatic Gas Suppression</h4>
+            <p class="body-sm" style="line-height:1.7;">Fast-acting automatic systems for server rooms and data centres — detect and suppress before damage occurs.</p>
+          </div>
+          <div class="card">
+            <h4 style="margin-bottom:0.5rem;">Server Room Safety</h4>
+            <p class="body-sm" style="line-height:1.7;">Purpose-designed protection for high-value IT environments with compliance to South African safety standards.</p>
+          </div>
+          <div class="card">
+            <h4 style="margin-bottom:0.5rem;">Industrial Facilities</h4>
+            <p class="body-sm" style="line-height:1.7;">Scalable suppression solutions for warehouses, manufacturing plants and logistics hubs with automated detection integration.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div><!-- end #fire -->
+
+<!-- ============================================================
+     TECHNOLOGY PAGE
+============================================================ -->
+<div id="technology" class="page-section">
+  <section class="section-pad" style="padding-top: 8rem;">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="tag">Platform Technology</span>
+        <h1 class="display-lg" style="margin: 0.75rem 0 0.75rem;">The Argon X<br><span style="color:var(--amber)">IoT Platform</span></h1>
+        <p class="lead" style="max-width: 580px;">A unified intelligence layer connecting every lock, sensor, and monitoring device. Event-driven. Encrypted. Always on.</p>
+      </div>
+
+      <div class="connectivity-bar reveal">
+        <div class="conn-item">
+          <div class="conn-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+          </div>
+          <div class="conn-label">NFC</div>
+          <div class="conn-sub">Near-field access</div>
+        </div>
+        <div class="conn-item">
+          <div class="conn-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg>
+          </div>
+          <div class="conn-label">BLE</div>
+          <div class="conn-sub">Bluetooth Low Energy</div>
+        </div>
+        <div class="conn-item">
+          <div class="conn-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <div class="conn-label">Satellite</div>
+          <div class="conn-sub">GEO comm stack</div>
+        </div>
+        <div class="conn-item">
+          <div class="conn-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          <div class="conn-label">Dashboard</div>
+          <div class="conn-sub">Argon X platform</div>
+        </div>
+      </div>
+
+      <div style="height: 3rem;"></div>
+
+      <div class="tech-grid">
+        <div class="tech-card reveal">
+          <div class="tech-number">01</div>
+          <h4>Tap to Access</h4>
+          <p>Using the Argon X mobile app, users tap their phone on the lock to open or close via NFC or BLE. Each interaction is instantly timestamped and logged.</p>
+        </div>
+        <div class="tech-card reveal reveal-delay-1">
+          <div class="tech-number">02</div>
+          <h4>Event-Driven Logging</h4>
+          <p>Every access event, door state change, temperature breach, or geo-location update is written immediately to the platform. Full traceability, no gaps.</p>
+        </div>
+        <div class="tech-card reveal reveal-delay-2">
+          <div class="tech-number">03</div>
+          <h4>Encrypted Credentials</h4>
+          <p>Device-level authentication with encrypted key exchange ensures that only authorised devices can interact with each lock — compliant and tamper-evident.</p>
+        </div>
+        <div class="tech-card reveal reveal-delay-3">
+          <div class="tech-number">04</div>
+          <h4>Satellite Expansion</h4>
+          <p>The proprietary GEO Satellite Communication Stack extends full monitoring capabilities beyond cellular coverage — ideal for remote African operations.</p>
+        </div>
+        <div class="tech-card reveal">
+          <div class="tech-number">05</div>
+          <h4>Unified Dashboard</h4>
+          <p>The Argon X platform displays lock status, access history, and geo-location across your entire fleet in a single interface. Custom data integrations available.</p>
+        </div>
+        <div class="tech-card reveal reveal-delay-1">
+          <div class="tech-number">06</div>
+          <h4>Flexible Integration</h4>
+          <p>Additional monitoring systems can link to each lock. Any custom data the client needs to track can be seamlessly incorporated into the Argon X platform.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div><!-- end #technology -->
+
+<!-- ============================================================
+     SHOP PAGE
+============================================================ -->
+<div id="shop" class="page-section">
+  <section class="section-pad" style="padding-top: 8rem;">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="tag">Product Catalogue</span>
+        <h1 class="display-lg" style="margin: 0.75rem 0 0.75rem;">Shop our solutions</h1>
+        <p class="lead" style="max-width: 520px;">Configure and order directly. Enterprise pricing, volume discounts and custom deployments available — contact us for a tailored quote.</p>
+      </div>
+
+      <div class="cart-indicator reveal">
+        <span class="cart-count" id="cart-count">0</span>
+        <div>
+          <div style="font-size: 0.875rem; font-weight: 500;">Shopping Cart</div>
+          <div class="cart-label">Items selected</div>
+        </div>
+        <div class="cart-total" id="cart-total">R 0.00</div>
+        <a class="btn btn-primary" href="#" onclick="showSection('contact')" style="margin-left: 0.5rem;">Request Formal Quote</a>
+      </div>
+
+      <div class="shop-filter-bar reveal">
+        <button class="filter-btn active" onclick="filterShop('all', this)">All Products</button>
+        <button class="filter-btn" onclick="filterShop('smart-lock', this)">Smart Locks</button>
+        <button class="filter-btn" onclick="filterShop('fire', this)">Fire Suppression</button>
+        <button class="filter-btn" onclick="filterShop('monitoring', this)">Monitoring</button>
+      </div>
+
+      <div class="shop-grid" id="shop-grid">
+
+        <div class="shop-card" data-category="smart-lock">
+          <div class="shop-card-img">
+            <span class="shop-card-badge badge-new">New</span>
+            <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+              <rect x="20" y="35" width="40" height="33" rx="4" fill="rgba(232,160,32,0.12)" stroke="rgba(232,160,32,0.5)" stroke-width="1.5"/>
+              <path d="M28 35V27a12 12 0 0124 0v8" stroke="rgba(232,160,32,0.7)" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="40" cy="51" r="5" fill="rgba(232,160,32,0.2)" stroke="var(--amber)" stroke-width="1.5"/>
+              <rect x="38" y="53" width="4" height="7" rx="1.5" fill="var(--amber)"/>
+            </svg>
+          </div>
+          <div class="shop-card-body">
+            <div class="shop-card-category">Smart Lock</div>
+            <div class="shop-card-name">Argon X External Smart Lock</div>
+            <div class="shop-card-desc">Marine-grade stainless steel, IP67 sealed with NFC and BLE access. Multi-year battery autonomy. Ideal for containers and truck gates.</div>
+            <div class="shop-card-footer">
+              <div>
+                <div class="shop-price">R 4,850</div>
+                <div class="shop-price-sub">excl. VAT · per unit</div>
+              </div>
+              <button class="add-to-cart" onclick="addToCart('Argon X External Smart Lock', 4850, this)">
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3z"/></svg>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="shop-card" data-category="smart-lock">
+          <div class="shop-card-img">
+            <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+              <rect x="15" y="20" width="50" height="52" rx="4" fill="rgba(46,127,192,0.08)" stroke="rgba(46,127,192,0.25)" stroke-width="1.5"/>
+              <rect x="24" y="38" width="32" height="26" rx="3" fill="rgba(232,160,32,0.08)" stroke="rgba(232,160,32,0.3)" stroke-width="1.25"/>
+              <path d="M31 38V32a9 9 0 0118 0v6" stroke="rgba(232,160,32,0.6)" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="40" cy="50" r="4.5" fill="rgba(232,160,32,0.15)" stroke="var(--amber)" stroke-width="1.25"/>
+              <rect x="38" y="52" width="4" height="6" rx="1.5" fill="var(--amber)"/>
+            </svg>
+          </div>
+          <div class="shop-card-body">
+            <div class="shop-card-category">Smart Lock</div>
+            <div class="shop-card-name">Argon X Internal Smart Lock</div>
+            <div class="shop-card-desc">Compact, concealed mounting. BLE and NFC access. Optional wired door and environmental sensors. Perfect for medical and telecom applications.</div>
+            <div class="shop-card-footer">
+              <div>
+                <div class="shop-price">R 3,650</div>
+                <div class="shop-price-sub">excl. VAT · per unit</div>
+              </div>
+              <button class="add-to-cart" onclick="addToCart('Argon X Internal Smart Lock', 3650, this)">
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3z"/></svg>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="shop-card" data-category="monitoring">
+          <div class="shop-card-img">
+            <span class="shop-card-badge badge-new">Popular</span>
+            <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+              <rect x="14" y="24" width="52" height="38" rx="4" fill="rgba(46,127,192,0.08)" stroke="rgba(46,127,192,0.3)" stroke-width="1.5"/>
+              <path d="M14 40h52" stroke="rgba(46,127,192,0.2)" stroke-width="1" stroke-dasharray="4 3"/>
+              <circle cx="40" cy="43" r="8" fill="rgba(46,127,192,0.12)" stroke="var(--steel)" stroke-width="1.5"/>
+              <path d="M40 39v4l3 2" stroke="var(--steel)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M20 14v8M16 16h8M16 20h8" stroke="rgba(232,160,32,0.5)" stroke-width="1.25" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="shop-card-body">
+            <div class="shop-card-category">Monitoring System</div>
+            <div class="shop-card-name">Reefer Monitoring Unit</div>
+            <div class="shop-card-desc">Continuous temperature, humidity and door event logging. Real-time threshold alerts. Satellite and cellular redundancy for full coverage.</div>
+            <div class="shop-card-footer">
+              <div>
+                <div class="shop-price">R 6,200</div>
+                <div class="shop-price-sub">excl. VAT · per unit</div>
+              </div>
+              <button class="add-to-cart" onclick="addToCart('Reefer Monitoring Unit', 6200, this)">
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3z"/></svg>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="shop-card" data-category="fire">
+          <div class="shop-card-img">
+            <span class="shop-card-badge badge-hot">Specialist</span>
+            <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+              <path d="M40 10C40 10 20 28 20 46c0 11 8.9 20 20 20s20-9 20-20c0-18-20-36-20-36z" fill="rgba(217,79,79,0.1)" stroke="rgba(217,79,79,0.4)" stroke-width="1.5"/>
+              <path d="M40 72c-7 0-12-8.5-12-18 0-10 12-22 12-22s12 12 12 22c0 9.5-5 18-12 18z" fill="rgba(217,79,79,0.15)" stroke="rgba(217,79,79,0.5)" stroke-width="1.25"/>
+            </svg>
+          </div>
+          <div class="shop-card-body">
+            <div class="shop-card-category">Fire Suppression</div>
+            <div class="shop-card-name">FireBlock Lithium Extinguisher — 2kg</div>
+            <div class="shop-card-desc">Specialist gel agent for lithium battery fires. Reduces temperature from 400°C-plus to below 60°C. Non-toxic, biodegradable. CE, UKCA and BSI KITEMARK certified.</div>
+            <div class="shop-card-footer">
+              <div>
+                <div class="shop-price">R 1,890</div>
+                <div class="shop-price-sub">excl. VAT · per unit</div>
+              </div>
+              <button class="add-to-cart" onclick="addToCart('FireBlock Lithium 2kg', 1890, this)">
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3z"/></svg>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="shop-card" data-category="fire">
+          <div class="shop-card-img">
+            <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+              <path d="M40 8C40 8 16 28 16 48c0 13.3 10.7 24 24 24s24-10.7 24-24c0-20-24-40-24-40z" fill="rgba(217,79,79,0.1)" stroke="rgba(217,79,79,0.4)" stroke-width="1.5"/>
+              <path d="M40 72c-8 0-14-9.7-14-20 0-11.5 14-24.5 14-24.5S54 40.5 54 52c0 10.3-6 20-14 20z" fill="rgba(217,79,79,0.15)" stroke="rgba(217,79,79,0.5)" stroke-width="1.25"/>
+            </svg>
+          </div>
+          <div class="shop-card-body">
+            <div class="shop-card-category">Fire Suppression</div>
+            <div class="shop-card-name">FireBlock Lithium Extinguisher — 6kg</div>
+            <div class="shop-card-desc">Heavy-duty lithium battery fire suppression for industrial and commercial use. Automatic gas suppression system-compatible. Full certifications included.</div>
+            <div class="shop-card-footer">
+              <div>
+                <div class="shop-price">R 4,200</div>
+                <div class="shop-price-sub">excl. VAT · per unit</div>
+              </div>
+              <button class="add-to-cart" onclick="addToCart('FireBlock Lithium 6kg', 4200, this)">
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3z"/></svg>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="shop-card" data-category="monitoring">
+          <div class="shop-card-img">
+            <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+              <rect x="12" y="20" width="56" height="40" rx="5" fill="rgba(232,160,32,0.06)" stroke="rgba(232,160,32,0.3)" stroke-width="1.5"/>
+              <rect x="20" y="28" width="18" height="24" rx="3" fill="rgba(232,160,32,0.08)" stroke="rgba(232,160,32,0.2)" stroke-width="1"/>
+              <rect x="42" y="28" width="18" height="24" rx="3" fill="rgba(46,127,192,0.08)" stroke="rgba(46,127,192,0.2)" stroke-width="1"/>
+              <circle cx="29" cy="40" r="4" fill="rgba(232,160,32,0.15)" stroke="var(--amber)" stroke-width="1"/>
+              <circle cx="51" cy="40" r="4" fill="rgba(46,127,192,0.15)" stroke="var(--steel)" stroke-width="1"/>
+            </svg>
+          </div>
+          <div class="shop-card-body">
+            <div class="shop-card-category">Platform Licence</div>
+            <div class="shop-card-name">Argon X Platform — Annual Licence</div>
+            <div class="shop-card-desc">Full access to the Argon X IoT dashboard. Unlimited lock connections, event history, geo-location tracking, and custom data integration. Includes satellite sync.</div>
+            <div class="shop-card-footer">
+              <div>
+                <div class="shop-price">R 8,400</div>
+                <div class="shop-price-sub">excl. VAT · per year</div>
+              </div>
+              <button class="add-to-cart" onclick="addToCart('Argon X Platform Licence', 8400, this)">
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3z"/></svg>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end shop-grid -->
+
+      <div style="margin-top: 3rem; background: var(--bg-layer); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 2.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 2rem;" class="reveal">
+        <div>
+          <h3 style="margin-bottom: 0.5rem;">Need a custom or volume order?</h3>
+          <p class="body-sm">Enterprise pricing is available for fleet deployments and bulk orders. Our team will build a tailored solution proposal for your specific requirements.</p>
+        </div>
+        <a class="btn btn-primary" href="#" onclick="showSection('contact')">Request Enterprise Quote</a>
+      </div>
+    </div>
+  </section>
+</div><!-- end #shop -->
+
+<!-- ============================================================
+     CONTACT PAGE
+============================================================ -->
+<div id="contact" class="page-section">
+  <section class="section-pad" style="padding-top: 8rem;">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="tag">Get in Touch</span>
+        <h1 class="display-lg" style="margin: 0.75rem 0 0.75rem;">Let's secure<br><span style="color:var(--amber)">your assets</span></h1>
+        <p class="lead" style="max-width: 520px;">Whether you need a product demo, enterprise pricing, technical consultation, or a tailored deployment — our team is ready.</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-info reveal">
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <div class="contact-detail-label">Location</div>
+              <div class="contact-detail-value">Johannesburg, Gauteng<br>South Africa</div>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <div class="contact-detail-label">Email</div>
+              <div class="contact-detail-value">info@21twelve.africa</div>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.1 6.1l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7a2 2 0 011.72 2.03z"/></svg>
+            </div>
+            <div>
+              <div class="contact-detail-label">Phone</div>
+              <div class="contact-detail-value">+27 (0) 10 000 0000</div>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <div class="contact-detail-label">Business Hours</div>
+              <div class="contact-detail-value">Monday – Friday<br>08:00 – 17:00 SAST</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-wrap reveal reveal-delay-1">
+          <h3 style="margin-bottom: 1.5rem;">Send us a message</h3>
+          <form id="contact-form" onsubmit="submitForm(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="first-name">First Name</label>
+                <input type="text" id="first-name" name="first_name" placeholder="John" required />
+              </div>
+              <div class="form-group">
+                <label for="last-name">Last Name</label>
+                <input type="text" id="last-name" name="last_name" placeholder="Smith" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">Business Email</label>
+              <input type="email" id="email" name="email" placeholder="john@company.co.za" required />
+            </div>
+            <div class="form-group">
+              <label for="company">Company Name</label>
+              <input type="text" id="company" name="company" placeholder="Your company" />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" placeholder="+27 82 000 0000" />
+            </div>
+            <div class="form-group">
+              <label for="inquiry">Type of Inquiry</label>
+              <select id="inquiry" name="inquiry" required>
+                <option value="" disabled selected>Select inquiry type</option>
+                <option value="smart-locks">Smart Lock Products</option>
+                <option value="fire">Fire Suppression Systems</option>
+                <option value="platform">Argon X Platform</option>
+                <option value="demo">Request a Demo</option>
+                <option value="enterprise">Enterprise / Volume Pricing</option>
+                <option value="technical">Technical Support</option>
+                <option value="other">General Inquiry</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Tell us about your security requirements, fleet size, or the challenge you need to solve..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary form-submit">Send Message</button>
+            <p class="form-note">We respond within one business day. Your information is treated in strict confidence.</p>
+          </form>
+          <div id="form-success">
+            <p>Thank you — your message has been received. A member of our team will be in touch within one business day.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div><!-- end #contact -->
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer>
+  <div class="container">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <div class="nav-logo" style="margin-bottom: 0;">
+          <div class="logo-icon">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd"/></svg>
+          </div>
+          21TWELVE AFRICA
+        </div>
+        <p>Intelligent security solutions for industry, logistics and commercial environments across the African continent.</p>
+        <div style="display:flex;gap:0.5rem;">
+          <span class="cert-badge" style="font-size:0.68rem;">CE Mark</span>
+          <span class="cert-badge" style="font-size:0.68rem;">UKCA</span>
+          <span class="cert-badge" style="font-size:0.68rem;">BSI KITEMARK</span>
+          <span class="cert-badge" style="font-size:0.68rem;">SANS1910</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Products</h5>
+        <ul>
+          <li><a href="#" onclick="showSection('smart-locks')">External Smart Locks</a></li>
+          <li><a href="#" onclick="showSection('smart-locks')">Internal Smart Locks</a></li>
+          <li><a href="#" onclick="showSection('smart-locks')">Reefer Monitoring</a></li>
+          <li><a href="#" onclick="showSection('fire')">Fire Suppression</a></li>
+          <li><a href="#" onclick="showSection('fire')">FireBlock Lithium</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Platform</h5>
+        <ul>
+          <li><a href="#" onclick="showSection('technology')">Argon X IoT Platform</a></li>
+          <li><a href="#" onclick="showSection('technology')">NFC Access</a></li>
+          <li><a href="#" onclick="showSection('technology')">BLE Connectivity</a></li>
+          <li><a href="#" onclick="showSection('technology')">Satellite Comms</a></li>
+          <li><a href="#" onclick="showSection('shop')">Licences</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#" onclick="showSection('contact')">Contact Us</a></li>
+          <li><a href="#" onclick="showSection('contact')">Request Demo</a></li>
+          <li><a href="#" onclick="showSection('contact')">Enterprise Sales</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- BACKEND DEVELOPER NOTES -->
+    <div class="backend-note">
+      <h4>Backend Integration Requirements — Developer Notes</h4>
+      <div class="backend-stack">
+        <div class="stack-item">
+          <div class="stack-item-title" style="color:var(--steel);">eCommerce Backend</div>
+          <div class="stack-item-desc">Recommended: Node.js (Express) or Python (Django/FastAPI) REST API with a PostgreSQL database for product catalogue, inventory, orders, and customer accounts. Integrate a South African payment gateway such as PayFast, Peach Payments, or Ozow for secure ZAR transactions. Cart state should be managed server-side with JWT authentication for logged-in users.</div>
+        </div>
+        <div class="stack-item">
+          <div class="stack-item-title" style="color:var(--steel);">Contact Form</div>
+          <div class="stack-item-desc">Implement a server-side form handler (Node/Express or PHP/Laravel) with server-side validation, CSRF protection, and reCAPTCHA v3 for spam prevention. Send confirmation emails via SendGrid or AWS SES. Store submissions in a database and route to a CRM such as HubSpot or Pipedrive via webhook.</div>
+        </div>
+        <div class="stack-item">
+          <div class="stack-item-title" style="color:var(--steel);">Authentication and Accounts</div>
+          <div class="stack-item-desc">Use OAuth 2.0 / JWT for customer authentication. Build a customer portal using Next.js or Nuxt.js (SSR/SSG) for order history, licence management, and platform access. AWS Cognito or Auth0 handle enterprise SSO requirements cleanly.</div>
+        </div>
+        <div class="stack-item">
+          <div class="stack-item-title" style="color:var(--steel);">IoT Platform Integration</div>
+          <div class="stack-item-desc">Connect the Argon X backend via WebSocket or MQTT for real-time event streaming to the dashboard. Use TimescaleDB or InfluxDB for time-series telemetry storage. An API gateway (AWS API Gateway or Kong) manages rate-limiting and authentication for device-side calls. Deploy with Docker on AWS ECS or Kubernetes for scalability.</div>
+        </div>
+        <div class="stack-item">
+          <div class="stack-item-title" style="color:var(--steel);">Content Management</div>
+          <div class="stack-item-desc">Use a headless CMS such as Sanity, Contentful, or Strapi to allow the 21Twelve team to update product descriptions, pricing, and landing pages without developer involvement. Pair with a Next.js frontend using ISR (Incremental Static Regeneration) for performance.</div>
+        </div>
+        <div class="stack-item">
+          <div class="stack-item-title" style="color:var(--steel);">Infrastructure and Compliance</div>
+          <div class="stack-item-desc">Host on AWS (Cape Town region af-south-1) for POPIA compliance and data residency. Use Cloudflare for CDN, DDoS protection, and SSL termination. Automated backups to S3, monitoring via Datadog or New Relic, and CI/CD through GitHub Actions or GitLab CI. Security scanning with Snyk and OWASP ZAP for vulnerability assessments.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>Copyright 2024 21Twelve Africa. All rights reserved.</p>
+      <p style="color:var(--text-muted);">Intelligent Security Solutions for Africa</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+  /* ---- Page routing ---- */
+  function showSection(id) {
+    document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
+    const section = document.getElementById(id);
+    if (section) {
+      section.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(initReveal, 100);
+    }
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  }
+
+  /* ---- Mobile nav ---- */
+  document.getElementById('hamburger').addEventListener('click', function () {
+    document.getElementById('mobile-nav').classList.toggle('open');
+  });
+  function closeMobileNav() {
+    document.getElementById('mobile-nav').classList.remove('open');
+  }
+
+  /* ---- Product tabs ---- */
+  function switchTab(name) {
+    document.querySelectorAll('.product-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+
+  /* ---- Shop filter ---- */
+  function filterShop(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.shop-card').forEach(card => {
+      if (cat === 'all' || card.dataset.category === cat) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  /* ---- Cart ---- */
+  let cartItems = [];
+  let cartTotal = 0;
+
+  function addToCart(name, price, btn) {
+    cartItems.push({ name, price });
+    cartTotal += price;
+    document.getElementById('cart-count').textContent = cartItems.length;
+    document.getElementById('cart-total').textContent = 'R ' + cartTotal.toLocaleString('en-ZA', { minimumFractionDigits: 2 });
+    btn.textContent = 'Added';
+    btn.style.background = 'var(--amber)';
+    btn.style.color = '#0B0D11';
+    showToast(name + ' added to cart');
+    setTimeout(() => {
+      btn.innerHTML = '<svg viewBox="0 0 20 20" fill="currentColor" width="14" height="14"><path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3z"/></svg>Add to Cart';
+      btn.style.background = '';
+      btn.style.color = '';
+    }, 2000);
+  }
+
+  /* ---- Toast ---- */
+  function showToast(msg) {
+    const toast = document.getElementById('toast');
+    document.getElementById('toast-msg').textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3000);
+  }
+
+  /* ---- Contact form ---- */
+  function submitForm(e) {
+    e.preventDefault();
+    const form = document.getElementById('contact-form');
+    const btn = form.querySelector('button[type=submit]');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+    /* 
+      BACKEND NOTE: Replace this timeout with a fetch() POST to your API endpoint:
+      fetch('/api/contact', { method: 'POST', body: new FormData(form) })
+        .then(r => r.json())
+        .then(data => { ... show success state ... })
+    */
+    setTimeout(() => {
+      form.style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+    }, 1400);
+  }
+
+  /* ---- Scroll reveal ---- */
+  function initReveal() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => {
+      if (!el.classList.contains('visible')) observer.observe(el);
+    });
+  }
+
+  /* ---- Init ---- */
+  document.addEventListener('DOMContentLoaded', () => {
+    initReveal();
+  });
+
+  /* ---- Nav scroll effect ---- */
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('nav');
+    if (window.scrollY > 20) {
+      nav.style.background = 'rgba(9,11,15,0.97)';
+    } else {
+      nav.style.background = 'rgba(9,11,15,0.85)';
+    }
+  });
+
+  /* ---- Lock item interaction ---- */
+  document.querySelectorAll('.lock-item').forEach(item => {
+    item.addEventListener('click', function() {
+      document.querySelectorAll('.lock-item').forEach(i => i.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
